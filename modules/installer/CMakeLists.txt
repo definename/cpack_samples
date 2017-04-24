@@ -1,0 +1,19 @@
+#
+# CPack + WiX configuration settings for Windows.
+#
+
+set(CPACK_GENERATOR WIX)
+set(CPACK_PACKAGE_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_BUILD}.${VERSION_REVISION}")
+set(CPACK_WIX_UPGRADE_GUID "0651118c-2921-11e7-93ae-92361f002671")
+set(CPACK_WIX_TEMPLATE "${CMAKE_CURRENT_SOURCE_DIR}/wix.template.in")
+set(CPACK_OUTPUT_FILE_PREFIX "${CMAKE_SOURCE_DIR}/deploy")
+set(CPACK_WIX_EXTENSIONS
+	WixUtilExtension
+	)
+
+configure_file(
+	${CMAKE_CURRENT_SOURCE_DIR}/config.wxi.cmake
+	${CMAKE_CURRENT_BINARY_DIR}/config.wxi
+	)
+
+include(CPack)
