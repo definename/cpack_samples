@@ -31,11 +31,13 @@
 
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="$(var.PlatformProgramFilesFolder)">
-				<Directory Id="INSTALLDIR" Name="$(var.ProductName)" />
+				<Directory Id="InstallDir" Name="$(var.InstallDir)">
+					<Directory Id="ProductDir" Name="$(var.ProductName)" />
+				</Directory>
 			</Directory>
 		</Directory>
 
-		<DirectoryRef Id="INSTALLDIR">
+		<DirectoryRef Id="ProductDir">
 			<Component Id="PCIAgent" Guid="c18597a6-292c-11e7-93ae-92361f002671">
 				<File Id="AgentExe" Source="$(var.BinDir)\cpack_test.exe" Vital="yes" />
 			</Component>

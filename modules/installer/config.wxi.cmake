@@ -2,7 +2,8 @@
 
 <Include xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <?define UpgradeCode = "@CPACK_WIX_UPGRADE_GUID@" ?>
-  <?define ProductName="PC Inventory Agent" ?>
+  <?define InstallDir="PC Inventory" ?>
+  <?define ProductName="Inventory Agent" ?>
   <?define UninstallName="Uninstall $(var.ProductName)" ?>
   <?define ProductVersion="@VERSION_MAJOR@.@VERSION_MINOR@.@VERSION_BUILD@.@VERSION_REVISION@" ?>
   <?define Manufacturer="@VERSION_COMPANY_NAME@" ?>
