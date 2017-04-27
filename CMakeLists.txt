@@ -6,12 +6,8 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 option(BUILD_WITH_STATIC_CRT "Use static run-time libraries (/MT or /MTd linker flags)" OFF)
 option(BUILD_SHARED_LIBS "Build shared libraries (.dll) instead of static ones (.lib)" OFF)
 
-# Sets executable output folder
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
-#
-# Version. 
-#
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "0")
 set(VERSION_BUILD "0")
@@ -29,8 +25,8 @@ endif()
 
 set(VERSION_REVISION "${REVISION_COUNT}")
 set(VERSION_FILE_REVISION "${REVISION_COUNT}")
-set(VERSION_COMPANY_NAME "Rabbit Inc.")
+set(VERSION_COMPANY_NAME "App Inc.")
 set(VERSION_COPYRIGHT "Copyright (C) 2017 ${VERSION_COMPANY_NAME}")
 
-add_subdirectory(modules/cpack_test)
-add_subdirectory(modules/installer)
+add_subdirectory(modules/app)
+add_subdirectory(modules/app_installer)

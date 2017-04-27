@@ -1,0 +1,5 @@
+if (MSVC)
+	add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/wix)
+else()
+	add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/nsis)
+endif()

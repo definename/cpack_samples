@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?include $(sys.CURRENTDIR)modules\app_installer\wix\config.wix ?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+	xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+
+	<Product Id="*"
+		Language="$(var.ProductLanguage)"
+		Manufacturer="$(var.ProductManufacturer)"
+		Name="$(var.ProductName)"
+		UpgradeCode="$(var.ProductUpgradeCode)"
+		Version="$(var.ProductVersion)">
+
+		<Package Id="*"
+			Comments="This package installs the $(var.ProductDisplayName)"
+			Compressed="yes"
+			Description="$(var.ProductName) Installer"
+			InstallerVersion="200"
+			Keywords="Installer"
+			Languages="$(var.ProductLanguage)"
+			Manufacturer="$(var.ProductManufacturer)"
+			Platform="$(sys.BUILDARCH)"
+			InstallPrivileges="elevated"
+			InstallScope="perMachine" />
+
+		<Icon Id="Icon" SourceFile="$(var.ProductIcon)"/>
+		<Property Id="ARPPRODUCTICON" Value="Icon" />
+
+		<MediaTemplate EmbedCab="yes" />
+		<MajorUpgrade
+			Schedule="afterInstallInitialize"
+			AllowSameVersionUpgrades="yes"
+			DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit." />
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="$(var.PlatformProgramFilesFolder)">
+				<Directory Id="InstallDir" Name="$(var.ProductInstallDir)">
+					<Directory Id="ProductDir" Name="$(var.ProductName)" />
+				</Directory>
+			</Directory>
+		</Directory>
+
+		<DirectoryRef Id="ProductDir">
+			<Component Id="App" Guid="3C8E68FA-2A9B-438A-8918-26631DD64C17">
+				<File Id="AppExe" Source="$(var.AppBinDir)/$(var.AppExeName)" Vital="yes" />
+				<!-- Service stuff -->
+				<!--
+				<ServiceInstall Id="AppServiceInstaller"
+					Name="$(var.AppServiceName)"
+					DisplayName="$(var.AppServiceDisplayName)"
+					Interactive="yes"
+					Vital="yes"
+					Start="auto"
+					Type="ownProcess"
+					Description="$(var.AppServiceDescription)"
+					ErrorControl="normal" />
+				<ServiceControl Id="AppServiceController"
+					Name="$(var.AppServiceName)"
+					Start="install"
+					Stop="both"
+					Remove="uninstall"
+					Wait="yes" />
+				<util:ServiceConfig
+					ServiceName="$(var.AppServiceName)"
+					ResetPeriodInDays="1"
+					RestartServiceDelayInSeconds="5"
+					FirstFailureActionType="restart"
+					SecondFailureActionType="restart"
+					ThirdFailureActionType="restart" />
+				-->
+			</Component>
+		</DirectoryRef>
+
+		<Feature Id="AppFeature" Title="$(var.ProductName)" Level="1">
+			<ComponentRef Id="App" />
+		</Feature>
+	</Product>
+</Wix>

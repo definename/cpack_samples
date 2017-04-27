@@ -1,4 +1,4 @@
-project(cpack_test)
+project(app)
 
 include(PCHSupport)
 include(CRTLinkage)
